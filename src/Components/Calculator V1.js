@@ -1,5 +1,4 @@
-import { Man } from "@mui/icons-material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const dataCalculator = [
   {
@@ -59,13 +58,13 @@ const dataCalculator = [
     id: "divide",
   },
   {
-    value: "=",
-    id: "equals",
-  },
-  {
     value: ".",
     id: "decimal",
   },
+  {
+    value: "=",
+    id: "equals",
+  }
 ];
 
 function Calculator() {
@@ -74,15 +73,7 @@ function Calculator() {
   const [opState, setOpState] = useState(false);
   const [gotresult, Setgotresult] = useState(false);
   const [isdecimal, setIsdecimal] = useState(false);
-  //FİX USEFFECT BANDAGE GOT PROBLEM WİTH DECİMAL TEST
-  useEffect(() => {
-    if (disNum === "5..") {
-      setDisNum(disNum.slice(0, -1))
-    }
-    if (disNum === "5.5.5") {
-      setDisNum(5.55)
-    }
-  })
+
 
   const equal = () => {
     if (opState) {
@@ -99,6 +90,7 @@ function Calculator() {
       Setgotresult(true);
     }
   };
+
   const resultmode = (value) => {
     if (/[+/*]/.test(value)) {
       setDisplay(disNum + value);
@@ -112,11 +104,13 @@ function Calculator() {
       Setgotresult(false);
     }
   };
+
   const amck = (value) => {
     setIsdecimal(true);
     setDisNum(value);
     setDisplay(display + value);
   };
+
   const calculate = (value) => {
     if (value === "=") {
       return equal();
@@ -167,14 +161,15 @@ function Calculator() {
       }
     }
   };
+  
   return (
     <main className="flex h-screen">
-      <div className="m-auto flex-col">
-        <div className="">
-          <h1 className="text-2xl">{display}</h1>
-          <h1 className="text-2xl" id="display">{disNum}</h1>
+      <div className="m-auto flex-col bg-slate-200 border-8 border-solid w-64 inline">
+        <div className="mb-3 pl-2 bg-slate-100 h-auto break-words">
+          <p className="text-2xl">{display}</p>
+          <p className="text-2xl" id="display">{disNum}</p>
         </div>
-      <div className=" grid grid-cols-4">
+        <div className=" grid grid-cols-4">
       {dataCalculator.map((getData) => {
         return (
           <div>
@@ -191,7 +186,7 @@ function Calculator() {
         );
       })}
       </div>
-      <div className="mt-5">
+        <div className="mt-5 text-center pb-2">
       <button
             className="mr-3 inline-block rounded bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#fbfbfb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]"
         onClick={() => {
