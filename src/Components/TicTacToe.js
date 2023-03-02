@@ -6,34 +6,41 @@ function TicTacToe() {
   const [click, setClick] = useState(0);
   const [xscore, setXScore] = useState(0);
   const [oscore, setOScore] = useState(0);
-  const [winner, setWinner] = useState(false);
-  const [mode, setMode] = useState("computerVS")
+  const [mode, setMode] = useState("playerVS");
+  const [winner, setWinner] = useState("");
 
   const computer = () => {
-    if (click < 8) {
-      let x = Math.floor(Math.random() * square.length)
-      while (square[x] !== "") {
-        x = Math.floor(Math.random() * square.length)
+    if (click <= 8) {
+      if (!turn) {
+        let x = Math.floor(Math.random() * square.length);
+        while (square[x] !== "") {
+          x = Math.floor(Math.random() * square.length);
+        }
+        square[x] = "O";
+        setTurn(true);
       }
-      square[x] = "O"
-      setClick(p => { return p + 1 })
-      setTurn(true)
     }
-  }
+  };
 
-  const handleClick = (i) => {  
+  const handleClick = (i) => {
     if (square[i]) {
-      return
+      return;
     }
     if (mode === "computerVS") {
-      square[i] = "X"
-      setClick(p => {return p + 1})
-      setTurn(false)
-    } 
+      if (turn) {
+        square[i] = "X";
+        setClick((p) => {
+          return p + 2;
+        });
+        setTurn(false);
+      }
+    }
     if (mode === "playerVS") {
-      square[i] = turn ? "X" : "O"
-      setTurn(!turn)
-      setClick(click + 1)
+      square[i] = turn ? "X" : "O";
+      setTurn(!turn);
+      setClick((p) => {
+        return p + 1;
+      });
     }
   };
 
@@ -52,9 +59,9 @@ function TicTacToe() {
     for (let i = 0; i < winningPatterns.length; i++) {
       const [a, b, c] = winningPatterns[i];
       if (square[a] && square[a] === square[b] && square[a] === square[c]) {
-        return game_reset(square[a])
+        return game_reset(square[a]);
       }
-    } 
+    }
   };
 
   const game_reset = (value) => {
@@ -75,44 +82,55 @@ function TicTacToe() {
       });
       setWinner("O has WON!");
     }
-    if (value === "draw") {
-      setWinner("DRAW");
-    }
-    setSquare(Array(9).fill(""));
     setTurn(true);
     setClick(0);
+    setSquare(Array(9).fill(""));
   };
 
   const display = () => {
     if (turn) {
-      return "it's X turn";
+      return "it's X turn"
     } else {
-      return "it's Y turn";
+      return "it's Y turn"
     }
   };
 
   useEffect(() => {
-    if(calculateWinner(square)) {
-      setWinner(true)
-      return
+    if (calculateWinner(square)) {
+      return;
     }
     if (click >= 9) {
-      game_reset("draw");
+      game_reset()
     }
-  })
-  
+  });
+
   useEffect(() => {
     if (mode === "computerVS") {
       if (!turn) {
-        computer()
+        computer();
       }
     }
-  })
+  });
+
+  useEffect(() => {
+    if (winner) {
+      setTimeout(() => {
+        setWinner("");
+      }, 1500);
+    }
+  }, [winner]);
+
+  useEffect(() => {
+    setWinner(mode)
+    setTimeout(() => {
+      setWinner("")
+    }, 2000)
+  }, [mode])
 
   return (
     <>
-      <main className="flex h-screen w-screen max-h-full max-w-full min-h-full min-w-full flex-col bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
-        <div className="m-auto font-thin border-2 border-solid border-sky-600 p-0.5 shadow-md shadow-sky-900">
+      <main className="flex h-screen max-h-full min-h-full w-screen min-w-full max-w-full flex-col bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
+        <div className="m-auto border-2 border-solid border-sky-600 p-0.5 font-thin shadow-md shadow-sky-900">
           <div className="mb-1 border-2 border-solid border-sky-300 p-2 text-center font-serif text-5xl text-sky-300 shadow-md shadow-current">
             <p>Tic Tac Toe</p>
           </div>
@@ -132,12 +150,12 @@ function TicTacToe() {
               </button>
             </div>
             <div className="relative bottom-20 right-5 text-right text-2xl text-sky-400">
-              <p>{display()}</p>
+              <p>{winner || display()}</p>
             </div>
           </div>
           <div className="grid grid-flow-col grid-rows-3 gap-3 border-2 border-solid border-sky-300 p-2 text-center text-8xl font-light text-sky-300 shadow-2xl shadow-sky-900">
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 hover:shadow-xl shadow-current"
+              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-xl"
               onClick={() => {
                 handleClick(0);
               }}
@@ -209,15 +227,20 @@ function TicTacToe() {
               {square[8]}
             </div>
           </div>
-          <div className="text-2xl text-center text-sky-300 pt-1 pb-1">
-            <button className="" onClick={() => {
-              if (mode === "playerVS") {
-                setMode("computerVS")
-              }
-              if (mode === "computerVS") {
-                setMode("playerVS")
-              }
-            }}>Select Mode</button>
+          <div className="pt-1 pb-1 text-center text-2xl text-sky-300">
+            <button
+              className=""
+              onClick={() => {
+                if (mode === "playerVS") {
+                  setMode("computerVS");
+                }
+                if (mode === "computerVS") {
+                  setMode("playerVS");
+                }
+              }}
+            >
+              Select Mode
+            </button>
           </div>
         </div>
       </main>
