@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 function TicTacToe() {
   const [turn, setTurn] = useState(true);
@@ -89,9 +89,9 @@ function TicTacToe() {
 
   const display = () => {
     if (turn) {
-      return "it's X turn"
+      return "it's X turn";
     } else {
-      return "it's Y turn"
+      return "it's Y turn";
     }
   };
 
@@ -100,7 +100,7 @@ function TicTacToe() {
       return;
     }
     if (click >= 9) {
-      game_reset()
+      game_reset();
     }
   });
 
@@ -121,115 +121,105 @@ function TicTacToe() {
   }, [winner]);
 
   useEffect(() => {
-    setWinner(mode)
+    setWinner(mode);
     setTimeout(() => {
-      setWinner("")
-    }, 2000)
-  }, [mode])
+      setWinner("");
+    }, 2000);
+  }, [mode]);
 
   return (
     <>
-      <main className="flex h-screen max-h-full min-h-full w-screen min-w-full max-w-full flex-col bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
-        <div className="m-auto border-2 border-solid border-sky-600 p-0.5 font-thin shadow-md shadow-sky-900">
-          <div className="mb-1 border-2 border-solid border-sky-300 p-2 text-center font-serif text-5xl text-sky-300 shadow-md shadow-current">
+      <main className='flex h-screen max-h-full min-h-full w-screen min-w-full max-w-full flex-col bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black'>
+        <div className='m-auto border-2 border-solid border-sky-600 p-0.5 font-thin shadow-md shadow-sky-900'>
+          <div className='mb-1 border-2 border-solid border-sky-300 p-2 text-center font-serif text-5xl text-sky-300 shadow-md shadow-current'>
             <p>Tic Tac Toe</p>
           </div>
-          <div className="mb-1 max-h-24 border-2 border-solid border-sky-300 bg-slate-600 shadow-md shadow-current">
-            <div className="relative top-3 left-5 text-2xl text-sky-400 ">
+          <div className='mb-1 max-h-24 border-2 border-solid border-sky-300 bg-slate-600 shadow-md shadow-current'>
+            <div className='relative top-3 left-5 text-2xl text-sky-400 '>
               <p>X Score : {xscore}</p>
-              <p className="relative right-0.5">O Score : {oscore}</p>
+              <p className='relative right-0.5'>O Score : {oscore}</p>
             </div>
-            <div className="text-center text-2xl text-sky-200">
+            <div className='text-center text-2xl text-sky-200'>
               <button
-                className="relative bottom-10 z-50 border-2 border-solid border-sky-300 bg-slate-500 p-1 shadow-sm shadow-sky-300 hover:shadow-2xl"
+                className='relative bottom-10 z-50 border-2 border-solid border-sky-300 bg-slate-500 p-1 shadow-sm shadow-sky-300 hover:shadow-2xl'
                 onClick={() => {
                   game_reset("full_reset");
-                }}
-              >
+                }}>
                 Reset
               </button>
             </div>
-            <div className="relative bottom-20 right-5 text-right text-2xl text-sky-400">
+            <div className='relative bottom-20 right-5 text-right text-2xl text-sky-400'>
               <p>{winner || display()}</p>
             </div>
           </div>
-          <div className="grid grid-flow-col grid-rows-3 gap-3 border-2 border-solid border-sky-300 p-2 text-center text-8xl font-light text-sky-300 shadow-2xl shadow-sky-900">
+          <div className='grid grid-flow-col grid-rows-3 gap-3 border-2 border-solid border-sky-300 p-2 text-center text-8xl font-light text-sky-300 shadow-2xl shadow-sky-900'>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-xl"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-xl'
               onClick={() => {
                 handleClick(0);
-              }}
-            >
+              }}>
               {square[0]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(1);
-              }}
-            >
+              }}>
               {square[1]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(2);
-              }}
-            >
+              }}>
               {square[2]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(3);
-              }}
-            >
+              }}>
               {square[3]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(4);
-              }}
-            >
+              }}>
               {square[4]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(5);
-              }}
-            >
+              }}>
               {square[5]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(6);
-              }}
-            >
+              }}>
               {square[6]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(7);
-              }}
-            >
+              }}>
               {square[7]}
             </div>
             <div
-              className="h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg"
+              className='h-32 w-32 border-2 border-solid border-sky-500 shadow-current hover:shadow-lg'
               onClick={() => {
                 handleClick(8);
-              }}
-            >
+              }}>
               {square[8]}
             </div>
           </div>
-          <div className="pt-1 pb-1 text-center text-2xl text-sky-300">
+          <div className='pt-1 pb-1 text-center text-2xl text-sky-300'>
             <button
-              className=""
+              className=''
               onClick={() => {
                 if (mode === "playerVS") {
                   setMode("computerVS");
@@ -237,8 +227,7 @@ function TicTacToe() {
                 if (mode === "computerVS") {
                   setMode("playerVS");
                 }
-              }}
-            >
+              }}>
               Select Mode
             </button>
           </div>

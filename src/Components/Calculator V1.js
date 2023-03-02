@@ -64,7 +64,7 @@ const dataCalculator = [
   {
     value: "=",
     id: "equals",
-  }
+  },
 ];
 
 function Calculator() {
@@ -73,7 +73,6 @@ function Calculator() {
   const [opState, setOpState] = useState(false);
   const [gotresult, Setgotresult] = useState(false);
   const [isdecimal, setIsdecimal] = useState(false);
-
 
   const equal = () => {
     if (opState) {
@@ -161,57 +160,59 @@ function Calculator() {
       }
     }
   };
-  
+
   return (
-    <main className="flex h-screen">
-      <div className="m-auto flex-col bg-slate-200 border-8 border-solid w-64 inline">
-        <div className="mb-3 pl-2 bg-slate-100 h-auto break-words">
-          <p className="text-2xl">{display}</p>
-          <p className="text-2xl" id="display">{disNum}</p>
+    <main className='flex h-screen'>
+      <div className='m-auto inline w-64 flex-col rounded-lg border-8 border-solid bg-slate-200 shadow-md shadow-current'>
+        <div className='mb-3 h-auto break-words bg-slate-100 pl-2'>
+          <p className='text-2xl'>{display}</p>
+          <p className='text-2xl' id='display'>
+            {disNum}
+          </p>
         </div>
-        <div className=" grid grid-cols-4">
-      {dataCalculator.map((getData) => {
-        return (
-          <div>
-            <button
-              className="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-black shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-              id={getData.id}
-              onClick={() => {
-                calculate(getData.value);
-              }}
-            >
-              {getData.value}
-            </button>
-          </div>
-        );
-      })}
-      </div>
-        <div className="mt-5 text-center pb-2">
-      <button
-            className="mr-3 inline-block rounded bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#fbfbfb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]"
-        onClick={() => {
-          if (display.length > 1) {
-            setDisplay(display.slice(0, -1));
-            setDisNum(disNum.slice(0, -1));
-          } else {
-            setDisplay(0);
-          }
-        }}
-      >
-        BACKSPACE
-      </button>
-      <button
-            className="inline-block rounded bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#fbfbfb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]"
-        id="clear"
-        onClick={() => {
-          setDisplay("");
-          setDisNum(0);
-          setOpState(false);
-          Setgotresult(false);
-        }}
-      >
-        CLEAR
-      </button>
+        <div className=' grid grid-cols-4'>
+          {dataCalculator.map((getData) => {
+            return (
+              <div>
+                <button
+                  className='bg-primary hover:bg-primary-600 focus:bg-primary-600 active:bg-primary-700 inline-block rounded px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-black shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]'
+                  id={getData.id}
+                  onClick={() => {
+                    calculate(getData.value);
+                  }}>
+                  {getData.value}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <div className='mt-5 pb-2 text-center'>
+          <button
+            className='mr-3 inline-block rounded bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#fbfbfb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]'
+            onClick={() => {
+              if (display.length > 1) {
+                setDisplay(display.slice(0, -1));
+                setDisNum(disNum.slice(0, -1));
+              } else {
+                setDisplay(0);
+              }
+            }}>
+            BACKSPACE
+          </button>
+          <button
+            className='inline-block rounded bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#fbfbfb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]'
+            id='clear'
+            onClick={() => {
+              setDisplay("");
+              setDisNum(0);
+              setOpState(false);
+              Setgotresult(false);
+            }}>
+            CLEAR
+          </button>
+        </div>
+        <div className='pt-3 text-center text-xs font-thin'>
+          <p>Alpha Version Might Have Problems</p>
         </div>
       </div>
     </main>

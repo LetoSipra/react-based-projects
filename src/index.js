@@ -1,5 +1,5 @@
 import React from "react";
-import XX from "./components/TicTacToe";
+import XX from "./components/drum machine";
 //import XX from './newApp'
 import "./index.css";
 import {createRoot} from "react-dom/client";
